@@ -20,6 +20,27 @@ router.get("/users", async (req, res) => {
     res.status(500).send(e);
   }
 });
+
+router.get("/users/:id", async (req, res) => {
+  const _id = req.params.id;
+
+  try {
+    const users = await User.findById(_id);
+
+    if (users) {
+      return res.status(404).send();
+    }
+    res.status(201).send(users);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+  // users.findById(_id).then users=>{
+  //     res.status(201).send users)
+  // }).catch(err =>{
+  //     res.status(500).send(err)
+  // })
+});
+
 router.patch("/users/:id", async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password"];

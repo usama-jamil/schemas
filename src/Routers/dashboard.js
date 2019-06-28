@@ -14,7 +14,7 @@ router.get("/dashboard/totalSales", async (req, res) => {
 
 router.get("/dashboard/todaySales", async (req, res) => {
     try {
-      const todaySales = await Sale.count({name: 'anand'});
+      const todaySales = await Sale.count({name: 'this how i do'});
       res.send(todaySales);
     } catch (e) {
       res.status(500).send(e);

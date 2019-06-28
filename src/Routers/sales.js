@@ -16,11 +16,32 @@ router.post("/sales", async (req, res) => {
 router.get("/sales", async (req, res) => {
   try {
     const sales = await sale.find({});
-    res.send(sale);
+    res.send(sales);
   } catch (e) {
     res.status(500).send(e);
   }
 });
+
+router.get("/sales/:id", async (req, res) => {
+  const _id = req.params.id;
+
+  try {
+    const sales = await sale.findById(_id);
+
+    if (sales) {
+      return res.status(404).send();
+    }
+    res.status(201).send(sales);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+  // users.findById(_id).then users=>{
+  //     res.status(201).send users)
+  // }).catch(err =>{
+  //     res.status(500).send(err)
+  // })
+});
+
 
 router.patch("/sales/:id", async (req, res) => {
   const updates = Object.keys(req.body);

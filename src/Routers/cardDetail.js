@@ -20,6 +20,27 @@ router.get("/cardDetail", async (req, res) => {
     res.status(500).send(e);
   }
 });
+
+router.get("/cardDetail/:id", async (req, res) => {
+  const _id = req.params.id;
+
+  try {
+    const cardDetail = await CardDetail.findById(_id);
+
+    if (cardDetail) {
+      return res.status(404).send();
+    }
+    res.status(201).send(cardDetail);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+  // users.findById(_id).then users=>{
+  //     res.status(201).send users)
+  // }).catch(err =>{
+  //     res.status(500).send(err)
+  // })
+});
+
 router.patch("/cardDetail/:id", async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "email", "password"];

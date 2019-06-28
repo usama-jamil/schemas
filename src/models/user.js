@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true,
-        trim: true,
         minlength: 6,
         validate(value){
             if(value.toLowerCase().includes('password')){
@@ -45,6 +44,13 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+// userSchema.methods.hashPassword = password =>{
+//     return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+// }
+
+// userSchema.methods.comparePassword = (password , hash) =>{
+//     return bcrypt.compareSync(password,hash)
+// }
 const User = mongoose.model('User',userSchema)
 
 module.exports = User
