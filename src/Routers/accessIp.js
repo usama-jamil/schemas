@@ -3,7 +3,7 @@ const AccessIp = require('../models/accessIp')
 const router =new express.Router()
 
 
-router.post('/accessIps', async (req,res)=>{
+router.post('/accessIp', async (req,res)=>{
 const AccessIp = require('../models/accessIp')
     const accessIp = new AccessIp(req.body)
 
@@ -15,7 +15,7 @@ const AccessIp = require('../models/accessIp')
     }
 })
 
-router.get('/accessIps',async (req,res)=>{
+router.get('/accessIp',async (req,res)=>{
 
     try{
         const accessIps = await AccessIp.find({})
@@ -26,7 +26,7 @@ router.get('/accessIps',async (req,res)=>{
 
 }
 )
-router.patch('/accessIps/:id', async (req , res) =>{
+router.patch('/accessIp/:id', async (req , res) =>{
     const updates = Object.keys(req.body)
     const allowedUpdates = ['ip']
     const isValidOperation = updates.every(update => allowedUpdates.includes(update))
@@ -52,7 +52,7 @@ router.patch('/accessIps/:id', async (req , res) =>{
     }
 })
 
-router.delete('/accessIps/:id', async (req,res)=>{
+router.delete('/accessIp/:id', async (req,res)=>{
     try {
         const accessIp = await AccessIp.findByIdAndDelete(req.params.id)
 
