@@ -8,8 +8,8 @@ module.exports = () => {
     done(null, user._id);
   });
 
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
       done(err, user);
     });
   });
@@ -29,7 +29,7 @@ module.exports = () => {
         // }
         // return done(null, user);
 
-        user.checkPassword(password, function(err, isMatch) {
+        user.checkPassword(password, (err, isMatch) => {
           if (err) {
             return done(err);
           }

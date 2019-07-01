@@ -23,7 +23,7 @@ router.use((req, res, next) => {
 });
 
 
-router.get("/", function(req, res, next) {
+router.get("/", (req, res, next) => {
   res.render("index", { title: "Express" });
 });
 
@@ -67,17 +67,17 @@ router.get("/", function(req, res, next) {
     failureFlash: true
   }));
   
-  router.get("/logout", function(req, res) {
+  router.get("/logout", (req, res) => {
     req.logout();
     res.send({logout: true});
   });
 
-  router.post("/signup", function(req, res, next) {
+  router.post("/signup", (req, res, next) => {
 
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({ username: username }, function(err, user) {
+  User.findOne({ username: username }, (err, user) => {
 
     if (err) { return next(err); }
     if (user) {
