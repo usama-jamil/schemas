@@ -4,10 +4,12 @@ const router = new express.Router();
 
 router.post("/cardDetail", async (req, res) => {
   const cardDetail = new CardDetail(req.body);
+  console.log(cardDetail)
   try {
-    await cardDetil.save();
+    await cardDetail.save();
     res.status(201).send(cardDetail);
   } catch (e) {
+    console.log(e)
     res.status(400).send(e);
   }
 });
@@ -27,7 +29,7 @@ router.get("/cardDetail/:id", async (req, res) => {
   try {
     const cardDetail = await CardDetail.findById(_id);
 
-    if (cardDetail) {
+    if (!cardDetail) {
       return res.status(404).send();
     }
     res.status(201).send(cardDetail);
@@ -43,7 +45,7 @@ router.get("/cardDetail/:id", async (req, res) => {
 
 router.patch("/cardDetail/:id", async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "password"];
+  const allowedUpdates = ["CreditCardNumber", "BankName", "Balance"];
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );

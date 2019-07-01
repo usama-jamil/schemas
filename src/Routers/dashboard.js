@@ -4,8 +4,8 @@ const router = new express.Router();
 
 router.get("/dashboard/totalSales", async (req, res) => {
   try {
-    const totalSales = await Sale.count();
-    res.send(totalSales);
+    const totalSales = await Sale.countDocuments();
+    res.send({totalSales});
   } catch (e) {
     res.status(500).send(e);
   }
@@ -14,8 +14,8 @@ router.get("/dashboard/totalSales", async (req, res) => {
 
 router.get("/dashboard/todaySales", async (req, res) => {
     try {
-      const todaySales = await Sale.count({name: 'this how i do'});
-      res.send(todaySales);
+      const todaySales = await Sale.count({Date: new Date("2019-07-01")});
+      res.send({todaySales});
     } catch (e) {
       res.status(500).send(e);
     }

@@ -5,7 +5,7 @@ const cardDetailSchema = new mongoose.Schema({
     CreditCardNumber : String,
     NameOnCard : String,
     ExpireDate: Date,
-    CVC: String,
+    CVC: Number,
     BankName: String,
     BankNumber: String,
     Balance:Number,
