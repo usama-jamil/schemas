@@ -12,7 +12,7 @@ const saleSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  Time: { type: Date, default: new Date().toLocaleTimeString() },
+  Time: { type: String, default: new Date().toLocaleTimeString() },
   Date: {
     type: Date,
     default: Date.now

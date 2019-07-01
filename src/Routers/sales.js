@@ -15,7 +15,7 @@ router.post("/sales", async (req, res) => {
 
 router.get("/sales", async (req, res) => {
   try {
-    const sales = await sale.find({});
+    const sales = await Sale.find({});
     res.send(sales);
   } catch (e) {
     res.status(500).send(e);
@@ -26,9 +26,9 @@ router.get("/sales/:id", async (req, res) => {
   const _id = req.params.id;
 
   try {
-    const sales = await sale.findById(_id);
+    const sales = await Sale.findById(_id);
 
-    if (sales) {
+    if (!sales) {
       return res.status(404).send();
     }
     res.status(201).send(sales);
@@ -83,4 +83,6 @@ router.delete("/sales/:id", async (req, res) => {
     res.status(400).send(e);
   }
 });
+
+
 module.exports = router;

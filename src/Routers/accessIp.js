@@ -3,9 +3,8 @@ const AccessIp = require("../models/accessIp");
 const router = new express.Router();
 
 router.post("/accessIp", async (req, res) => {
-  const AccessIp = require("../models/accessIp");
   const accessIp = new AccessIp(req.body);
-
+      console.log(accessIp)
   try {
     await accessIp.save();
     res.status(201).send(accessIp);
@@ -27,12 +26,12 @@ router.get("/accessIp/:id", async (req, res) => {
   const _id = req.params.id;
 
   try {
-    const accessIps = await AccessIp.findById(_id);
+    const accessIp = await AccessIp.findById(_id);
 
-    if (accessIps) {
+    if (!accessIp) {
       return res.status(404).send();
     }
-    res.status(201).send(accessIps);
+    res.status(201).send(accessIp);
   } catch (e) {
     res.status(500).send(e);
   }
@@ -44,7 +43,7 @@ router.get("/accessIp/:id", async (req, res) => {
 });
 router.patch("/accessIp/:id", async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["ip"];
+  const allowedUpdates = ["ip","access"];
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );

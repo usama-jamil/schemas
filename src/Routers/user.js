@@ -23,11 +23,11 @@ router.get("/users", async (req, res) => {
 
 router.get("/users/:id", async (req, res) => {
   const _id = req.params.id;
-
   try {
     const users = await User.findById(_id);
+    console.log(users)
 
-    if (users) {
+    if (!users) {
       return res.status(404).send();
     }
     res.status(201).send(users);

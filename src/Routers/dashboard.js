@@ -38,3 +38,5 @@ router.get("/dashboard/todaySales", async (req, res) => {
       res.status(500).send(e);
     }
   });
+
+  module.exports = router;
