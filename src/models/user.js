@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['Agent','Closer']
+        enum: ['Agent','Closer','Admin']
     }
 })
 
@@ -65,6 +65,15 @@ userSchema.pre("save", function(done) {
     });
   });
   
+  userSchema.methods.getPublicUser = function (){
+    const userObject = this.toObject()
+
+    delete userObject.password
+    delete userObject.creationData
+    delete userObject.signInDate
+
+    return userObject
+  }
   userSchema.methods.checkPassword = function(guess, done) {
     bcrypt.compare(guess, this.password, function(err, isMatch) {
       done(err, isMatch);
