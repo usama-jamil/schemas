@@ -56,7 +56,13 @@ const cardDetailSchema = new mongoose.Schema({
 cardDetailSchema.methods.getPublicCardDetail = function (){
     const cardDetailObject = this.toObject()
 
-    delete cardDetailObject
+    delete cardDetailObject.CVC
+    delete cardDetailObject.CreditCardNumber
+    delete cardDetailObject.ExpireDate
+    delete cardDetailObject.BankNumber
+    delete cardDetailObject.Available
+    delete cardDetailObject.DuePayment
+    delete cardDetailObject.DuePayDate
 
     return cardDetailObject
 }

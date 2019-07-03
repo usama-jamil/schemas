@@ -12,11 +12,11 @@ const saleSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      validate(value){
-        if(validator.isNumeric(value)){
-            throw new Error('You must enter valid contact number')
+      validate(value) {
+        if (validator.isNumeric(value)) {
+          throw new Error("You must enter valid contact number");
         }
-    }
+      }
     },
     Time: { type: String, default: new Date().toLocaleTimeString() },
     Status: {
@@ -71,27 +71,32 @@ const saleSchema = new mongoose.Schema(
       type: String,
       enum: ["Loan", "Mortgages", "Loan-Mortgages", "Other"]
     },
-    MonthlyRentMortgage: { type: Number  }
+    MonthlyRentMortgage: { type: Number },
+    Agent: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User"
+    }
   },
   { timestamps: true }
 );
 
-saleSchema.methods.getPublicSale = function(){
-  const saleObject = this.toObject()
+saleSchema.methods.getPublicSale = function() {
+  const saleObject = this.toObject();
 
-  delete saleObject.ContactNumber
-  delete saleObject.State
-  delete saleObject.Email
-  delete saleObject.SocialSecurityNumber
-  delete saleObject.MotherMediansName
-  delete saleObject.SocialSecurityNumber
-  delete saleObject.HighestLevelofEducation
-  delete saleObject.EmploymentStatus
-  delete saleObject.HousingStatus
-  delete saleObject.OtherLoans
+  delete saleObject.ContactNumber;
+  delete saleObject.State;
+  delete saleObject.Email;
+  delete saleObject.SocialSecurityNumber;
+  delete saleObject.MotherMediansName;
+  delete saleObject.SocialSecurityNumber;
+  delete saleObject.HighestLevelofEducation;
+  delete saleObject.EmploymentStatus;
+  delete saleObject.HousingStatus;
+  delete saleObject.OtherLoans;
 
-  return saleObject
-}
+  return saleObject;
+};
 
 const Sale = mongoose.model("Sale", saleSchema);
 

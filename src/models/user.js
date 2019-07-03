@@ -2,6 +2,7 @@ const  mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Sale = require('./sale')
 
 
 var SALT_FACTOR = 10;
@@ -48,6 +49,12 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+userSchema.virtual('sales', {
+  ref: 'Sale',
+  localField: '_id',
+  foreignField: 'Agent'
+})
+
 userSchema.pre("save", function(done) {
     var user = this;
   
@@ -79,6 +86,13 @@ userSchema.pre("save", function(done) {
       done(err, isMatch);
     });
   };
+
+  // Delete user tasks when user is removed
+userSchema.pre('remove', async function (next) {
+  const user = this
+  await Sale.deleteMany({ Agent: user._id })
+  next()
+})
   
   userSchema.methods.name = function() {
     return this.displayName || this.username;
