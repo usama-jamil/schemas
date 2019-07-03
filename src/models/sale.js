@@ -79,7 +79,16 @@ const saleSchema = new mongoose.Schema(
 saleSchema.methods.getPublicSale = function(){
   const saleObject = this.toObject()
 
-  delete saleObject
+  delete saleObject.ContactNumber
+  delete saleObject.State
+  delete saleObject.Email
+  delete saleObject.SocialSecurityNumber
+  delete saleObject.MotherMediansName
+  delete saleObject.SocialSecurityNumber
+  delete saleObject.HighestLevelofEducation
+  delete saleObject.EmploymentStatus
+  delete saleObject.HousingStatus
+  delete saleObject.OtherLoans
 
   return saleObject
 }
